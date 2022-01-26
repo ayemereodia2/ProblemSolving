@@ -9,58 +9,80 @@ public class ListNode {
     public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
 }
  
-//class Solution {
-//
-//    func mergeTwoLists(_ list1: ListNode?, _ list2: ListNode?) -> ListNode? {
-//        var headNode:ListNode? = ListNode(0)
-//        var templist1 = list1
-//        var templist2 = list2
-//        var tempHead:ListNode?
-//
-//        repeat {
-//            if let val1 = templist1?.val, let val2 = templist2?.val {
-//
-//                if val1 < val2 {
-//                    if headNode?.next == nil {
-//                        headNode?.next = list1
-//                    }else{
-//                        tempHead = headNode?.next
-//                        tempHead = list1
-//                    }
-//                    templist1 = templist1?.next
-//                }else if val2 < val1 {
-//                    if headNode?.next == nil {
-//                        headNode?.next = list1
-//                    }else{
-//                        tempHead = headNode?.next
-//                        tempHead = list2
-//                    }
-//                    templist2 = templist2?.next
-//                }else {
-//                    if headNode?.next == nil {
-//                        headNode?.next = list1
-//                        headNode?.next?.next = list2
-//                    }else{
-//                        tempHead = headNode?.next
-//                        tempHead = list2
-//                        tempHead?.next = list1
-//                    }
-//                }
-//            }
-//
-//
-//        }while (templist1?.next != nil && templist2?.next != nil)
-//        headNode = tempHead
-//
-//        return headNode
-//    }
-//}
-let l1 = ListNode(1,l2)
-let l2 = ListNode(2,l3)
-let l3 = ListNode(3,l4)
-let l4 = ListNode(4,nil)
+class Solution {
+    
+    var headNode:ListNode? = nil
 
-var head = ListNode(0, l1)
+    func mergeTwoLists(_ list1: ListNode?, _ list2: ListNode?) -> ListNode? {
+        var templist1 = list1
+        var templist2 = list2
+        
+        if list1 == nil && list2 == nil {
+            return nil
+        }
+        
+        if list1 == nil {
+            return list2
+        }
+        if list2 == nil {
+            return list1
+        }
+        
+        repeat {
+            let val1 = templist1?.val ?? 0
+            let val2 = templist2?.val ?? 0
+            if templist1 != nil && templist2 != nil {
+            
+            if  val1 < val2 {
+                addToHead(data: val1)
+                templist1 = templist1?.next
+
+            } else {
+                addToHead(data: val2)
+                templist2 = templist2?.next
+            }
+        }
+             
+         if templist1 != nil && templist2 == nil {
+             let val1 = templist1?.val ?? 0
+            addToHead(data: val1)
+            templist1 = templist1?.next
+        }
+            
+        if templist2 != nil && templist1 == nil {
+             let val2 = templist2?.val ?? 0
+            addToHead(data: val2)
+         templist2 = templist2?.next
+ 
+        }
+        
+     }
+        while (templist1 != nil || templist2 != nil)
+        return headNode
+    }
+    
+       private func addToHead(data: Int) {
+           if data == 7 {
+               print(data)
+           }
+        let newNode = ListNode(data)
+        var head = headNode
+        if var temp = head {
+            
+            while let next = temp.next {
+                
+                temp = next
+            }
+            temp.next = newNode
+          
+        }else {
+            head = newNode
+            headNode = head
+        }
+    }
+}
+
+
 //
 //let l5 = ListNode(5,l6)
 //let l6 = ListNode(6,l7)
@@ -131,11 +153,24 @@ public class LinkList<T> {
     }
 }
 
+var headNode: ListNode?
+private func addToHead(data: Int) {
+    let newNode = ListNode(data)
+    var head = headNode
+    if var temp = head {
+        
+        while let next = temp.next {
+            temp = next
+        }
+        temp.next = newNode
+    }else {
+        head = newNode
+        headNode = head
+    }
+}
 
-let n1 = LinkList<String>()
-n1.append(data: "Hello")
-n1.append(data: "Hello")
+addToHead(data: 3)
+addToHead(data: 5)
+addToHead(data: 7)
 
-
-print(n1.count)
-
+print(headNode?.next?.next?.val)
