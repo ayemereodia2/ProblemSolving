@@ -62,9 +62,7 @@ class Solution {
     }
     
        private func addToHead(data: Int) {
-           if data == 7 {
-               print(data)
-           }
+    
         let newNode = ListNode(data)
         var head = headNode
         if var temp = head {
@@ -83,16 +81,6 @@ class Solution {
 }
 
 
-//
-//let l5 = ListNode(5,l6)
-//let l6 = ListNode(6,l7)
-//let l7 = ListNode(7,l8)
-//let l8 = ListNode(8,nil)
-//
-//let head2 = ListNode(0, l5)
-//
-//let sol = Solution()
-//let result = sol.mergeTwoLists(head,head2)
 
 //What is a LinkedList DS?
 
@@ -151,26 +139,34 @@ public class LinkList<T> {
         }
         return count
     }
-}
-
-var headNode: ListNode?
-private func addToHead(data: Int) {
-    let newNode = ListNode(data)
-    var head = headNode
-    if var temp = head {
+    
+    public func nodeAt(index:Int) -> Node? {
         
-        while let next = temp.next {
-            temp = next
+        if index == 0 {
+            return head
+        }else {
+            var next = head?.next
+            for _ in 1..<index {
+                next = next?.next
+                if next == nil {
+                    break
+                }
+            }
+            return next
         }
-        temp.next = newNode
-    }else {
-        head = newNode
-        headNode = head
+    }
+    
+    public func `subscript`(index: Int) -> T? {
+        guard let node = nodeAt(index: index) else { return nil }
+        return node.data
     }
 }
 
-addToHead(data: 3)
-addToHead(data: 5)
-addToHead(data: 7)
+let node = LinkList<Int>()
+node.append(data: 2)
+node.append(data: 4)
+node.append(data: 6)
+node.append(data: 8)
+let newNode = node.nodeAt(index:0)
 
-print(headNode?.next?.next?.val)
+let val = node.subscript(index:0)
