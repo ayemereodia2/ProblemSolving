@@ -10,8 +10,8 @@ class Solution {
         if L == R { return nums[L] }
         let m = L + (R - L) / 2
 
-                
-        let l = maxSub(nums,L,m-1)
+            
+        let l = maxSub(nums,L,m)
         let r = maxSub(nums,m+1,R)
         let c = maxCrossSubArray(nums,L,m,R)
         return max(l,r,c)
@@ -22,17 +22,17 @@ class Solution {
         var leftSum = 0
         var rightSum = 0
         var curSum = 0
+        
         for i in (0..<m).reversed() {
             curSum += nums[i]
             leftSum = max(curSum,leftSum)
-            print("leftSum is ",leftSum)
         }
         curSum = 0
-        for i in m..<R {
+        for i in m...R {
             curSum += nums[i]
             rightSum = max(curSum,rightSum)
-            print("rightSum is ",rightSum)
         }
+        print(leftSum, rightSum)
         return (leftSum + rightSum)
     }
     
@@ -85,4 +85,4 @@ func maxCrossSubArray(_ nums:[Int]) -> Int {
     return (leftSum + rightSum)
 }
 
-//let result = maxCrossSubArray([-2,1])
+//let result = maxCrossSubArray([5,4,-1,7,8])
