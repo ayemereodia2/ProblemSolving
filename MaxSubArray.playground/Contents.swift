@@ -3,6 +3,7 @@ import UIKit
 
 class Solution {
     func maxSubArray(_ nums: [Int]) -> Int {
+
         return maxSub(nums,0,nums.count - 1)
     }
     
@@ -20,7 +21,7 @@ class Solution {
     
     func maxCrossSubArray(_ nums:[Int], _ L:Int, _ m:Int, _ R: Int) -> Int {
         var leftSum = 0
-        var rightSum = 0
+        var rightSum = nums[m]
         var curSum = 0
         
         for i in (0..<m).reversed() {
@@ -31,6 +32,7 @@ class Solution {
         for i in m...R {
             curSum += nums[i]
             rightSum = max(curSum,rightSum)
+           
         }
         print(leftSum, rightSum)
         return (leftSum + rightSum)
@@ -41,7 +43,7 @@ class Solution {
 
 let pro = Solution()
 
-let res = pro.maxSubArray([5,4,-1,7,8])
+let res = pro.maxSubArray([0,-3,1,1])
 /*
  for val1 in 0..<nums.count {
      nextLarge = nums[val1]
@@ -62,8 +64,6 @@ let res = pro.maxSubArray([5,4,-1,7,8])
  */
 
 func maxCrossSubArray(_ nums:[Int]) -> Int {
-    var leftSum = 0
-    var rightSum = 0
     var curSum = 0
     
     let L = 0
@@ -71,13 +71,22 @@ func maxCrossSubArray(_ nums:[Int]) -> Int {
         
     let m = L + (R - L) / 2
     
+    var leftSum = nums[m]
+    var rightSum = nums[m]
+    
     for i in (0..<m).reversed() {
+//        if i == m - 1{
+//            leftSum = nums[i]
+//        }
         curSum += nums[i]
         leftSum = max(curSum,leftSum)
         print("leftSum is ",leftSum)
     }
     curSum = 0
     for i in m..<R {
+//        if i == m {
+//            rightSum = nums[i]
+//        }
         curSum += nums[i]
         rightSum = max(curSum,rightSum)
         print("rightSum is ",rightSum)
@@ -85,4 +94,7 @@ func maxCrossSubArray(_ nums:[Int]) -> Int {
     return (leftSum + rightSum)
 }
 
-//let result = maxCrossSubArray([5,4,-1,7,8])
+//let result = maxCrossSubArray([-2,1,-3,4,-1,2,1,-5,4])
+
+
+
