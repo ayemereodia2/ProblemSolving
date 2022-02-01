@@ -98,3 +98,24 @@ func maxCrossSubArray(_ nums:[Int]) -> Int {
 
 
 
+/*
+ kadane algorithm
+ explanation???
+ 
+ class Solution {
+     func maxSubArray(_ nums: [Int]) -> Int {
+            var current = 0, best = 0, maximum = nums.first ?? 0
+         for num in nums {
+             maximum = max(maximum, num)
+             current = max(0, current + num)
+             best = max(best, current)
+         }
+         if maximum <= 0 {
+             return maximum
+         } else {
+             return best
+         }
+     }
+      
+ }
+ */
