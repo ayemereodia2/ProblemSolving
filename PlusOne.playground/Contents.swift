@@ -20,8 +20,6 @@ func plusOne(_ digits: [Int]) -> [Int] {
                         temp.remove(at:i)
                         temp.append(last)
                     }
-                    //print(temp)
-                    //print(conv)
                 }
             }
         }while(conv.count > 1)
