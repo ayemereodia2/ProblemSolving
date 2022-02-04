@@ -24,7 +24,7 @@ func toBinary(baseTen:Int) -> String {
      str.map {res += String($0)}
     return res
 }
-//toBinary(baseTen:4)
+//toBinary(baseTen:21)
 
 
 func addBinary(_ a: String, _ b: String) -> String {
@@ -32,17 +32,19 @@ func addBinary(_ a: String, _ b: String) -> String {
     let brr = Array(b)
     var aSum = 0
     var bSum = 0
-    for i in 0..<a.count {
-        let vc = arr[i]
+    for i in (0..<a.count).reversed() {
+        let index = (a.count - 1)
+        let vc = arr[index - i]
         aSum += Int("\(vc)")! * toPower2(power:i)
     }
     print(aSum)
     
-    for j in 0..<b.count {
-        let vc = brr[j]
+    for j in (0..<b.count).reversed() {
+        let index = (b.count - 1)
+        let vc = brr[index - j]
         bSum += Int("\(vc)")! * toPower2(power:j)
     }
     return toBinary(baseTen:aSum + bSum)
 }
 
-addBinary("11","1")
+addBinary("1010","1011")
