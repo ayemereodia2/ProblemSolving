@@ -81,4 +81,3 @@ func addBinary1(_ a: String, _ b: String) -> String {
     
     return output
 }
-addBinary1("1010","1011")
